@@ -14,10 +14,14 @@ class CharactersRepository {
 
   Future<Either<BaseFailure, Response<Map<String, dynamic>>>> fetchNext({
     Map<String, dynamic>? queryParameters,
+    String? nextPage,
   }) async {
     try {
+      final String url = nextPage != null && nextPage.isNotEmpty
+          ? nextPage
+          : "${EnvConfig.instance!.values.baseUrl}${EnvConfig.instance!.values.charactersPath}";
       final httpResponse = await _dio.get<Map<String, dynamic>>(
-        "${EnvConfig.instance!.values.baseUrl}${EnvConfig.instance!.values.charactersPath}",
+        url,
         queryParameters: queryParameters,
       );
       return right(httpResponse);

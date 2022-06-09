@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'repositories/characters_repository.dart';
+import 'ui/pages/detail/detail_page.dart';
+import 'ui/pages/home/home_page.dart';
+import 'ui/theme/custom_theme.dart';
 
 class RickAndMortyApp extends StatelessWidget {
   const RickAndMortyApp({
@@ -9,19 +10,14 @@ class RickAndMortyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CharactersRepository(dio: Dio()).fetchNext();
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      title: 'Prueba Enerbit',
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (context) => const HomePage(),
+        DetailPage.routeName: (context) => const DetailPage(),
+      },
+      theme: CustomTheme.lightTheme,
     );
   }
 }

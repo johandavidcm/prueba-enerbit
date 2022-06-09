@@ -13,15 +13,16 @@ class CharactersService {
 
   Future<Either<BaseFailure, CharactersResponse>> fetchNext({
     String? nextPage,
+    String? searchTerm,
   }) async {
     try {
-      Map<String, dynamic>? queryParameters;
-      if (nextPage != null) {
-        queryParameters = {};
-        queryParameters["page"] = nextPage.split("page=").last;
+      Map<String, dynamic> queryParameters = {};
+      if (searchTerm != null && searchTerm.isNotEmpty) {
+        queryParameters["name"] = searchTerm;
       }
       final response = await _charactersRepository.fetchNext(
-        queryParameters: queryParameters,
+        queryParameters: queryParameters.isEmpty ? null : queryParameters,
+        nextPage: nextPage,
       );
       final foldResponse = response.fold(
         (baseFailure) => baseFailure,

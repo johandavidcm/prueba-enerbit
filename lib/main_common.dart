@@ -1,4 +1,17 @@
+import 'package:flutter/services.dart';
+
 import 'src/app.dart';
 import 'package:flutter/material.dart';
 
-void mainCommon() => runApp(const RickAndMortyApp());
+import 'src/dependencies.dart';
+
+void mainCommon() {
+  setupDependencies();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+  runApp(const RickAndMortyApp());
+}
