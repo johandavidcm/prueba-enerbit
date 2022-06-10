@@ -20,7 +20,7 @@ class CardCharacter extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25),
               child: SizedBox(
-                height: MediaQuery.of(context).size.width * 0.4,
+                height: 170,
                 child: Stack(
                   children: [
                     SizedBox(
@@ -31,35 +31,41 @@ class CardCharacter extends StatelessWidget {
                             character.image,
                           ),
                           child: InkWell(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              DetailPage.routeName,
-                              arguments: character,
-                            ),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                DetailPage.routeName,
+                              );
+                              getIt<CharactersBloc>().add(
+                                CharactersEvent.onSelectedCharacterChanged(
+                                  character: some(character),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: 15,
-                      right: 15,
+                      top: 10,
+                      right: 10,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(
                           250,
                         ),
-                        child: GestureDetector(
-                          onTap: () {
-                            // TODO: Hacer guardado en localstorage
-                          },
-                          child: Container(
-                            color: const Color(0xFF747474),
-                            width: 40,
-                            height: 40,
-                            child: const Center(
-                              child: Icon(
-                                Icons.favorite_border,
-                                color: CustomTheme.scaffoldBackGround,
-                              ),
+                        child: Container(
+                          color: character.isFavorite
+                              ? CustomTheme.primaryColor
+                              : const Color(0xFF747474),
+                          width: 35,
+                          height: 35,
+                          child: Center(
+                            child: Icon(
+                              character.isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              size: 18,
+                              color: CustomTheme.scaffoldBackGround,
                             ),
                           ),
                         ),

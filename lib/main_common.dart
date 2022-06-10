@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'src/dependencies.dart';
 
-void mainCommon() {
+void mainCommon() async {
   setupDependencies();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

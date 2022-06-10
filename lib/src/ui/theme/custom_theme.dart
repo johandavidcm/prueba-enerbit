@@ -30,7 +30,7 @@ class CustomTheme {
         style: OutlinedButton.styleFrom(
           primary: primaryColor,
           padding: const EdgeInsets.symmetric(
-            vertical: 10,
+            vertical: 12,
             horizontal: 5,
           ),
           shape: const RoundedRectangleBorder(
@@ -74,20 +74,21 @@ class CustomTheme {
           return defaultMaterialTextTheme.bodyText1!;
         },
       ),
+      labelStyle: defaultMaterialTextTheme.bodyText1,
       enabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(18)),
         borderSide: BorderSide(
           style: BorderStyle.none,
         ),
       ),
       focusedBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(18)),
         borderSide: BorderSide(
           style: BorderStyle.none,
         ),
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(18),
         borderSide: const BorderSide(
           style: BorderStyle.none,
         ),
@@ -123,7 +124,6 @@ class CustomTheme {
       headline5: GoogleFonts.poppins(
         fontSize: 23,
         fontWeight: FontWeight.w400,
-        color: Colors.black,
       ),
       headline6: GoogleFonts.poppins(
         fontSize: 19,

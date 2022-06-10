@@ -22,7 +22,9 @@ class TextStatusCharacter extends StatelessWidget {
             width: widthText,
             child: Text(
               character.status?.toSpanishString ?? '',
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                    color: CustomTheme.greyTextColor,
+                  ),
               overflow: TextOverflow.ellipsis,
             ),
           ),

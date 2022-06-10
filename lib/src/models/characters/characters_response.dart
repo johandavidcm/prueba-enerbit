@@ -1,14 +1,22 @@
+import 'package:equatable/equatable.dart';
+
 import 'character.dart';
 import 'info_response.dart';
 
-class CharactersResponse {
-  CharactersResponse({
+class CharactersResponse extends Equatable {
+  const CharactersResponse({
     required this.info,
     required this.results,
   });
 
   final Info info;
   final List<Character> results;
+
+  @override
+  List<Object?> get props => [
+        info,
+        results,
+      ];
 
   factory CharactersResponse.fromJson(Map<String, dynamic> json) =>
       CharactersResponse(
@@ -19,9 +27,4 @@ class CharactersResponse {
           ),
         ),
       );
-
-  Map<String, dynamic> toJson() => {
-        "info": info.toJson(),
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
-      };
 }

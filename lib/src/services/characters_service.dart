@@ -33,8 +33,14 @@ class CharactersService {
         if (httpResponse.data != null) {
           return right(CharactersResponse.fromJson(httpResponse.data!));
         }
+        return left(
+          const BaseFailure(
+            errorMessage: 'No ha sido posible obtener una respuesta',
+          ),
+        );
+      } else {
+        return left(foldResponse as BaseFailure);
       }
-      return left(foldResponse as BaseFailure);
     } catch (e) {
       return left(
         const BaseFailure(

@@ -1,3 +1,5 @@
+import 'repositories/episodies_repository.dart';
+import 'services/episodies_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'blocs/characters/characters_bloc.dart';
@@ -12,9 +14,15 @@ void setupDependencies() {
   final charactersService = CharactersService(
     charactersRepository: charactersRepository,
   );
+  final episodiesRepository = EpisodiesRepository(dio: dio);
+  final episodieService = EpisodieService(
+    episodiesRepository: episodiesRepository,
+  );
+
   getIt.registerSingleton<CharactersBloc>(
     CharactersBloc(
       charactersService: charactersService,
+      episodieService: episodieService,
     ),
   );
 }

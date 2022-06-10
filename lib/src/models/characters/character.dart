@@ -1,8 +1,11 @@
+import 'package:equatable/equatable.dart';
+
 import '../../enums/enums.dart';
+import '../episodies/episodie.dart';
 import '../location/location.dart';
 
-class Character {
-  Character({
+class Character extends Equatable {
+  const Character({
     required this.id,
     required this.name,
     this.status,
@@ -15,6 +18,8 @@ class Character {
     required this.episode,
     required this.url,
     required this.created,
+    this.isFavorite = false,
+    this.firstEpisode,
   });
 
   final int id;
@@ -29,6 +34,59 @@ class Character {
   final List<String> episode;
   final String url;
   final DateTime created;
+  final bool isFavorite;
+  final Episodie? firstEpisode;
+
+  Character copyWith({
+    int? id,
+    String? name,
+    Status? status,
+    Species? species,
+    String? type,
+    Gender? gender,
+    Location? origin,
+    Location? location,
+    String? image,
+    List<String>? episode,
+    String? url,
+    DateTime? created,
+    bool? isFavorite,
+    Episodie? firstEpisode,
+  }) =>
+      Character(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        status: status ?? this.status,
+        species: species ?? this.species,
+        type: type ?? this.type,
+        gender: gender ?? this.gender,
+        origin: origin ?? this.origin,
+        location: location ?? this.location,
+        image: image ?? this.image,
+        episode: episode ?? this.episode,
+        url: url ?? this.url,
+        created: created ?? this.created,
+        isFavorite: isFavorite ?? this.isFavorite,
+        firstEpisode: firstEpisode ?? this.firstEpisode,
+      );
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        status,
+        species,
+        type,
+        gender,
+        origin,
+        location,
+        image,
+        episode,
+        url,
+        created,
+        isFavorite,
+        firstEpisode,
+      ];
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
         id: json["id"],
@@ -44,19 +102,4 @@ class Character {
         url: json["url"],
         created: DateTime.parse(json["created"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "status": statusValues.reverse[status],
-        "species": speciesValues.reverse[species],
-        "type": type,
-        "gender": genderValues.reverse[gender],
-        "origin": origin.toJson(),
-        "location": location.toJson(),
-        "image": image,
-        "episode": List<dynamic>.from(episode.map((x) => x)),
-        "url": url,
-        "created": created.toIso8601String(),
-      };
 }

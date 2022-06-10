@@ -72,7 +72,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       RichText(
                         text: TextSpan(
-                          style: Theme.of(context).textTheme.headline5,
+                          style:
+                              Theme.of(context).textTheme.headline5?.copyWith(
+                                    color: const Color(0xFF535353),
+                                  ),
                           children: [
                             const TextSpan(text: 'Personajes '),
                             TextSpan(
@@ -92,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       TextField(
                         onChanged: (value) => getIt<CharactersBloc>().add(
-                          CharactersEvent.onNextPageRequested(
+                          CharactersEvent.onSearchWithFilterRequested(
                             searchTerm: value,
                           ),
                         ),
